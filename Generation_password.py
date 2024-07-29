@@ -23,6 +23,8 @@ def generate_passwords(count, length):
     return passwords
 
 
-n, m = int(input()), int(input())
-
+print("Введите количество генерируемых паролей")
+n = int(input())
+print("Введите длину генерируемого пароля (минимум 3 символа)")
+m = int(input())
 print(*generate_passwords(n, m), sep="\n")
