@@ -14,8 +14,7 @@ class Main_page(Base):
     url = 'https://www.respublica.ru/'
 
 
-
-    """locators"""
+    """Локаторы"""
 
     loc_autorization_button = '//a[@title="Авторизоваться"]'
     loc_profile_button = '//div[@class="nr-header__user-nav-item nr-header__user-nav-item--user nr-header__user-nav-item--logged"]'
@@ -27,7 +26,7 @@ class Main_page(Base):
     loc_catalog_book_bestsellers = '//div[@class="category-children-item computed-span-2"]/a[contains(text(), "Бестселлеры")]'
     section_name = '(//h1[@class="title font-medium text-2xl leading-7 text-black p-0 m-0 mb-4 px-5 lg:px-0"])'
 
-    """Getters"""
+    """Нахождение элементов"""
 
     def get_loc_autorization_button(self): #получение локатора кнопки авторизации
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_autorization_button)))
@@ -56,7 +55,7 @@ class Main_page(Base):
     def get_section_name(self): #получение локатора строки каталока - бестселлеры
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.section_name)))
 
-    """Actions"""
+    """Действия"""
 
     def click_autorization_button(self):
         self.get_loc_autorization_button().click()
@@ -88,7 +87,7 @@ class Main_page(Base):
         print('Click link bestseller')
 
 
-    """Methods"""
+    """Методы"""
 
     def autorization(self):
         self.driver.get(self.url) #переход на сайт

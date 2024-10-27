@@ -7,8 +7,8 @@ from base.base_class import Base
 
 
 class Bestseller_page(Base):
-    """locators"""
 
+    """Локаторы"""
     loc_left_price_point = '(//div[@class="vue-slider-dot"])[1]' #локатор точки нижней цены
     loc_right_price_point = '(//div[@class="vue-slider-dot"])[2]' #локатор точки высшей цены
 
@@ -41,8 +41,7 @@ class Bestseller_page(Base):
 
 
 
-    """Getters"""
-
+    """Нахождение элемента"""
     def get_left_price_point(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_left_price_point)))
 
@@ -103,7 +102,7 @@ class Bestseller_page(Base):
     def get_cart_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_cart_button)))
 
-    """Actions"""
+    """Действия"""
 
     def move_left_price_point(self,price):
         action = ActionChains(self.driver)
@@ -178,13 +177,11 @@ class Bestseller_page(Base):
     def int_price_product_2(self):
         return int(self.get_price_product_2().text.replace(' ', ''))
 
-
-
     def click_cart_button(self):
         return self.get_cart_button().click()
 
 
-    """Methods"""
+    """Методы"""
 
     def change_left_price(self,l_price):
         self.get_current_url()

@@ -7,7 +7,8 @@ from base.base_class import Base
 
 
 class Cart_page(Base):
-    """locators"""
+
+    """Локаторы"""
 
     loc_name_product_1 = '(//a[@class="font-medium text-gray-primary truncate-2 text-sm md:text-base"])[1]' #локатор наименования продукта
     loc_name_product_2 = '(//a[@class="font-medium text-gray-primary truncate-2 text-sm md:text-base"])[2]'  # локатор наименования продукта
@@ -21,11 +22,7 @@ class Cart_page(Base):
     loc_total_price = '//div[@class="text-gray-primary text-2xl font-bold"]' #локатор окончательной суммы
     loc_place_order = '//a[@title="Оформить заказ"]' #локатор кнопки оформления заказа
 
-
-
-
-
-    """Getters"""
+    """Нахождение элементов"""
 
     def get_name_product_1(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_name_product_1)))
@@ -54,7 +51,7 @@ class Cart_page(Base):
     def get_place_order(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_place_order)))
 
-    """Actions"""
+    """Действия"""
 
     def click_increase_count_product_button(self):
         self.get_increase_count_product_button().click()
@@ -78,7 +75,7 @@ class Cart_page(Base):
     def int_count_product(self):
         return int(self.get_count_product().text.split()[1])
 
-    """Methods"""
+    """Методы"""
 
     def assert_name_product(self,name_products):
         self.get_current_url()
@@ -100,8 +97,6 @@ class Cart_page(Base):
         assert  sum_price == order_price == total_price
         print('order and total price correct')
 
-
-
     def change_count_product(self):
         count = self.int_count_product()
         price_product_1 = self.int_price_product_1()
@@ -115,7 +110,6 @@ class Cart_page(Base):
         new_order_price = self.int_order_price()
         new_total_price = self.int_total_price()
         new_count = self.int_count_product()
-
 
         assert new_count == count+1
         print('count increase correct')

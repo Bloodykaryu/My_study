@@ -1,8 +1,8 @@
 import time
 
 import pytest
-from selenium import webdriver #импортируется функция webdriver из selenium
-from selenium.webdriver.chrome.service import Service #импортируется модуль Service из библиотеки Selenium
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from pages.bestsellers_page import Bestseller_page
 from pages.cart_page import Cart_page
 from pages.checkout_page import Checkout_page
@@ -11,10 +11,10 @@ from pages.main_page import Main_page
 
 def test_buy_products():
     """Открытие браузера"""
-    options = webdriver.ChromeOptions()  # создаем экземпляр класса ChromeOptions и добавляем опцию "detach", чтобы браузер не закрывался после завершения сеанса тестирования.
+    options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
-    g = Service()  # создаем экземпляр класса Service, который представляет собой фоновый процесс драйвера Chrome. Этот процесс будет работать в фоновом режиме и управлять браузером.
-    driver = webdriver.Chrome(options=options, service=g)  # создаем экземпляр класса WebDriver, который представляет собой драйвер для управления браузером. В параметре options мы передаем опции, которые мы создали в первых двух строках кода, а в параметре service мы передаем экземпляр класса Service.
+    g = Service()
+    driver = webdriver.Chrome(options=options, service=g)
     print('start test 1')
 
     """Загрузка страницы и авторизация"""
@@ -36,7 +36,6 @@ def test_buy_products():
     bp.choose_type_book_hardcover() #выбор твердой обложки
 
     """Сортировка"""
-
     bp.choose_discount_sort() #сортировка по скидке
     bp.check_discount_sort() #проверка сортировки
 
@@ -57,11 +56,9 @@ def test_buy_products():
 
     """Проверки имени товара и цены в корзине"""
     cp = Cart_page(driver)
-
     cp.assert_name_product(name_products) #проверка наименований
     cp.assert_price_product(price_products) #проверка цен
     cp.assert_sum_order() #проверка общих сумм
-
     cp.change_count_product() #изменение количества
 
     """Сохранение для последующей проверки"""
@@ -71,8 +68,8 @@ def test_buy_products():
     """Переход на завершение оформления"""
     cp.place_order()
 
-    chp = Checkout_page(driver)
     """Проверка количества и цены"""
+    chp = Checkout_page(driver)
     chp.assert_price(total_price)
     chp.assert_count(total_count)
 

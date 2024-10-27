@@ -5,14 +5,14 @@ from base.base_class import Base
 
 
 class Checkout_page(Base):
-    """locators"""
+
+    """Локаторы"""
     loc_count_product = '//span[@class="text-sm text-gray-secondary"]'
     loc_total_price = '(//div[@class="text-2xl font-bold"])[1]'
     loc_order_price = '(//div[@class="text-xl font-medium"])[1]'
 
 
-    """Getters"""
-
+    """Нахождение элементов"""
     def get_count_product(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_count_product)))
 
@@ -23,8 +23,7 @@ class Checkout_page(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.loc_total_price)))
 
 
-    """Actions"""
-
+    """Действия"""
     def int_order_price(self):
         return int(self.get_order_price().text.replace(' ',''))
 
@@ -34,8 +33,7 @@ class Checkout_page(Base):
     def int_count_product(self):
         return int(self.get_count_product().text.split()[0])
 
-    """Methods"""
-
+    """Методы"""
     def assert_price(self, cart_total_price):
         self.get_current_url()
         total_price = self.int_total_price()
